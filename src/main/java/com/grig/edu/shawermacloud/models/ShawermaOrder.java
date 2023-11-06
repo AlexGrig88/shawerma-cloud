@@ -19,7 +19,7 @@ public class ShawermaOrder {
 
     private List<Shawerma> shawaList = new ArrayList<>();
 
-    public void addShawa(Shawerma shawa) {
+    public void addShawerma(Shawerma shawa) {
         shawaList.add(shawa);
     }
 }
