@@ -4,8 +4,10 @@ import com.grig.edu.shawermacloud.models.Ingredient;
 import com.grig.edu.shawermacloud.models.Shawerma;
 import com.grig.edu.shawermacloud.models.ShawermaOrder;
 import com.grig.edu.shawermacloud.repositories.InMemoryIngredients;
+import com.grig.edu.shawermacloud.repositories.IngredientRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,11 +26,17 @@ import java.util.stream.Collectors;
 @SessionAttributes("shawermaOrder")
 public class DesignShawermaController {
 
+    private final IngredientRepository ingredientsRepo;
+
+    public DesignShawermaController(@Qualifier("inMemoryIngredients") IngredientRepository repository) {
+        this.ingredientsRepo = repository;
+    }
+
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         for (var type : Ingredient.Type.values()) {
             model.addAttribute(
-                    type.toString().toLowerCase(), filteredByType(InMemoryIngredients.get(), type));
+                    type.toString().toLowerCase(), filteredByType(ingredientsRepo.findAll(), type));
         }
     }
 

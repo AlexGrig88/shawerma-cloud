@@ -5,9 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class InMemoryIngredients {
-    private final static List<Ingredient> ingredients = List.of(
-            new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
+@Repository
+public class InMemoryIngredients implements IngredientRepository {
+    private final List<Ingredient> ingredients;
+    {
+        ingredients = List.of(
+                new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
                 new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
                 new Ingredient("CARN", "Carnitas", Ingredient.Type.PROTEIN),
@@ -19,10 +22,12 @@ public class InMemoryIngredients {
                 new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE)
         );
 
+    }
     private InMemoryIngredients() {
     }
 
-    public static List<Ingredient> get() {
+    @Override
+    public List<Ingredient> findAll() {
         return ingredients;
     }
 }

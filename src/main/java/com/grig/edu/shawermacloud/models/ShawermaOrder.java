@@ -22,7 +22,7 @@ public class ShawermaOrder {
     @NotBlank(message = "Обязательно для заполнения")
     private String deliveryZip;
 
-    @CreditCardNumber
+    //@CreditCardNumber
     private String ccNumber;
 
     @Pattern(regexp = "^(0[1-9]|1[0-2])(/)(20[2-9][2-9])$")
