@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    name: shawermacloud
+    generate-unique-name: false
