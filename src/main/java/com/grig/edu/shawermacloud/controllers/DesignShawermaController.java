@@ -4,10 +4,16 @@ import com.grig.edu.shawermacloud.models.Ingredient;
 import com.grig.edu.shawermacloud.models.Shawerma;
 import com.grig.edu.shawermacloud.models.ShawermaOrder;
 import com.grig.edu.shawermacloud.repositories.InMemoryIngredients;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +54,12 @@ public class DesignShawermaController {
     }
 
     @PostMapping
-    public String processShawerma(Shawerma shawerma, @ModelAttribute ShawermaOrder shawermaOrder) {
+    public String processShawerma(@Valid Shawerma shawerma,
+                                  Errors errors,
+                                  @ModelAttribute ShawermaOrder shawermaOrder) {
+        if (errors.hasErrors()) {
+            return "/design";
+        }
         shawermaOrder.addShawerma(shawerma);
         log.info("Processing shawerma: {}", shawerma);
         return "redirect:/orders/current";
