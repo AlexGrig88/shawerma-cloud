@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<h1>Design your Shawerma!</h1>
+<h1>Создайте свою уникальную шаурму!</h1>
 <img th:src="@{/images/shawerma.png}"/>
 
 <!-- tag::formTag[] -->
@@ -26,55 +26,55 @@
     <!-- end::head[] -->
     <div class="ingredient-group" id="wraps">
       <!-- tag::designateWrap[] -->
-      <h3>Designate your wrap:</h3>
+      <h3>Выберите хлебную обёртку:</h3>
       <div th:each="ingredient : ${wrap}">
         <input th:field="*{ingredients}" type="checkbox"
                th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        <span th:text="${ingredient.ruName}">INGREDIENT</span><br/>
       </div>
       <!-- end::designateWrap[] -->
     </div>
 
     <div class="ingredient-group" id="proteins">
-      <h3>Pick your protein:</h3>
-      <div th:each="ingredient : ${protein}">
+      <h3>Отметьте предпочитаемое мясо:</h3>
+      <div th:each="ingredient : ${meat}">
         <input th:field="*{ingredients}" type="checkbox"
                th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        <span th:text="${ingredient.ruName}">INGREDIENT</span><br/>
       </div>
     </div>
 
     <div class="ingredient-group" id="cheeses">
-      <h3>Choose your cheese:</h3>
+      <h3>Выберите любимый сыр:</h3>
       <div th:each="ingredient : ${cheese}">
         <input th:field="*{ingredients}" type="checkbox"
                th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        <span th:text="${ingredient.ruName}">INGREDIENT</span><br/>
       </div>
     </div>
 
     <div class="ingredient-group" id="veggies">
-      <h3>Determine your veggies:</h3>
+      <h3>Собирите овощной набор:</h3>
       <div th:each="ingredient : ${veggies}">
         <input th:field="*{ingredients}" type="checkbox"
                th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        <span th:text="${ingredient.ruName}">INGREDIENT</span><br/>
       </div>
     </div>
 
     <div class="ingredient-group" id="sauces">
-      <h3>Select your sauce:</h3>
+      <h3>Добавьте соус:</h3>
       <div th:each="ingredient : ${sauce}">
         <input th:field="*{ingredients}" type="checkbox"
                th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        <span th:text="${ingredient.ruName}">INGREDIENT</span><br/>
       </div>
     </div>
   </div>
 
   <div>
 
-    <h3>Name your Shawerma creation:</h3>
+    <h3>Придумайте имя для своей великолепной шаурмы:</h3>
     <input type="text" th:field="*{name}"/>
     <!-- end::all[] -->
     <span class="validationError"
@@ -83,7 +83,7 @@
     <!-- tag::all[] -->
     <br/>
 
-    <button>Submit Your Shawerma</button>
+    <button>Отправить на приготовление</button>
   </div>
   <!-- tag::closeFormTag[] -->
 </form>
