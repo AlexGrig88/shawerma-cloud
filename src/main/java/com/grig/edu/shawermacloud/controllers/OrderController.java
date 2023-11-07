@@ -1,8 +1,10 @@
 package com.grig.edu.shawermacloud.controllers;
 
 import com.grig.edu.shawermacloud.models.ShawermaOrder;
+import com.grig.edu.shawermacloud.repositories.order.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,12 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes("shawermaOrder")
 public class OrderController {
 
+    private final OrderRepository orderRepository;
+
+    public OrderController(@Qualifier("jdbcOrderRepository") OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     @GetMapping("/current")
     public String processOrder() {
         return "orderForm";
@@ -30,6 +38,7 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Order submitted: {}", order);
+        orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/success";
     }

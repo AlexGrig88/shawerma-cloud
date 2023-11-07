@@ -1,7 +1,6 @@
 package com.grig.edu.shawermacloud.repositories.ingredient;
 
 import com.grig.edu.shawermacloud.models.Ingredient;
-import com.grig.edu.shawermacloud.repositories.IngredientRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

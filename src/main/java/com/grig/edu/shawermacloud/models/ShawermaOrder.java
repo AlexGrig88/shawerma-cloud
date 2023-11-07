@@ -3,6 +3,7 @@ package com.grig.edu.shawermacloud.models;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
@@ -24,7 +25,9 @@ public class ShawermaOrder {
     private String deliveryStreet;
     @NotBlank(message = "Обязательно для заполнения")
     private String deliveryState;
+
     @NotBlank(message = "Обязательно для заполнения")
+    @Digits(integer = 6, fraction = 0, message = "Почтовый индекс должен содержать 6 цифр")
     private String deliveryZip;
 
     //@CreditCardNumber
@@ -36,9 +39,9 @@ public class ShawermaOrder {
     @Digits(integer = 3, fraction = 0, message = "Некорректный cvv")
     private String ccCVV;
 
-    private List<Shawerma> shawaList = new ArrayList<>();
+    private List<Shawerma> shawermaList = new ArrayList<>();
 
     public void addShawerma(Shawerma shawa) {
-        shawaList.add(shawa);
+        shawermaList.add(shawa);
     }
 }

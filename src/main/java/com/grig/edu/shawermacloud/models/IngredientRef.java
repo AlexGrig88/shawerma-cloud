@@ -1,0 +1,8 @@
+package com.grig.edu.shawermacloud.models;
+
+import lombok.Data;
+
+@Data
+public class IngredientRef {
+    private final String ingredient;
+}

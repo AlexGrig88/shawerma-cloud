@@ -1,7 +1,6 @@
 package com.grig.edu.shawermacloud.repositories.ingredient;
 
 import com.grig.edu.shawermacloud.models.Ingredient;
-import com.grig.edu.shawermacloud.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,8 +13,10 @@ import java.util.Optional;
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository  {
 
-    private static final String SELECT_ALL = "SELECT id, name, ru_name, type FROM ingredient" ;
-    private static final String SELECT_BY_ID = "SELECT id, name, ru_name, type FROM ingredient WHERE id=?";
+    private static final String SELECT_ALL = "SELECT id, name, ru_name, type FROM Ingredient" ;
+    private static final String SELECT_BY_ID = "SELECT id, name, ru_name, type FROM Ingredient WHERE id=?";
+    private static final String SAVE = "INSERT INTO Ingredient(id, name, ru_name, type) VALUES (?,?,?,?)";
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -29,7 +30,7 @@ public class JdbcIngredientRepository implements IngredientRepository  {
     }
 
     @Override
-    public Optional<Ingredient> findById(Long id) {
+    public Optional<Ingredient> findById(String id) {
         var ingredients = jdbcTemplate.query(SELECT_BY_ID, this::mapRow, id);
         return ingredients.size() == 0 ?
                 Optional.empty() :
@@ -37,8 +38,11 @@ public class JdbcIngredientRepository implements IngredientRepository  {
     }
 
     @Override
-    public Optional<Ingredient> save(Ingredient entity) {
-        return IngredientRepository.super.save(entity);
+    public Optional<Ingredient> save(Ingredient ingredient) {
+        jdbcTemplate.update(SAVE,
+                ingredient.getId(), ingredient.getName(),
+                ingredient.getRuName(), ingredient.getType().toString());
+        return Optional.of(ingredient);
     }
 
     private Ingredient mapRow(ResultSet rs, int rowNum) throws SQLException {
