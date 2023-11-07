@@ -1,7 +1,7 @@
 package com.grig.edu.shawermacloud.converters;
 
 import com.grig.edu.shawermacloud.models.Ingredient;
-import com.grig.edu.shawermacloud.repositories.IngredientRepository;
+import com.grig.edu.shawermacloud.repositories.ingredient.IngredientRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,10 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
     @Override
     public Ingredient convert(String id) {
+        return ingredientRepository.findById(id).orElse(null);
+    }
+
+    private Ingredient convertForImmutableIngredients(String id) {
         map = ingredientRepository.findAll()
                 .stream()
                 .collect(Collectors.toMap(Ingredient::getId, i -> i));
