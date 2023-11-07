@@ -5,24 +5,36 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class InMemoryIngredients {
-    private final static List<Ingredient> ingredients = List.of(
-            new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
-                new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
-                new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
-                new Ingredient("CARN", "Carnitas", Ingredient.Type.PROTEIN),
-                new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES),
-                new Ingredient("LETC", "Lettuce", Ingredient.Type.VEGGIES),
-                new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE),
-                new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE),
-                new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
-                new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE)
+@Repository
+public class InMemoryIngredients implements IngredientRepository {
+    private final List<Ingredient> ingredients;
+    {
+        ingredients = List.of(
+                new Ingredient("FLTO", "Flour Tortilla", "Пшеничная тортилья", Ingredient.Type.WRAP),
+                new Ingredient("COTO", "Corn Tortilla", "Кукурузная тортилья", Ingredient.Type.WRAP),
+                new Ingredient("PITA", "Pita bread", "Лаваш", Ingredient.Type.WRAP),
+                new Ingredient("GRBF", "Ground Beef", "Мраморная говядина", Ingredient.Type.MEAT),
+                new Ingredient("CARN", "Carnitas", "Свинина", Ingredient.Type.MEAT),
+                new Ingredient("MUTT", "Mutton", "Баранина", Ingredient.Type.MEAT),
+                new Ingredient("TMTO", "Diced Tomatoes", "Помидоры", Ingredient.Type.VEGGIES),
+                new Ingredient("LETC", "Lettuce", "Салат Латук", Ingredient.Type.VEGGIES),
+                new Ingredient("CUCU", "Cucumber", "Свежий огурчик", Ingredient.Type.VEGGIES),
+                new Ingredient("CABG", "Cabbage", "Капуста", Ingredient.Type.VEGGIES),
+                new Ingredient("ONIO", "Onion", "Лук-порей", Ingredient.Type.VEGGIES),
+                new Ingredient("CHED", "Cheddar", "Чеддер", Ingredient.Type.CHEESE),
+                new Ingredient("JACK", "Monterrey Jack", "Монтерей Джек", Ingredient.Type.CHEESE),
+                new Ingredient("GODA", "Gouda", "Гауда", Ingredient.Type.CHEESE),
+                new Ingredient("SLSA", "Salsa", "Сальса", Ingredient.Type.SAUCE),
+                new Ingredient("SRCR", "Sour Cream",  "Сметана", Ingredient.Type.SAUCE),
+                new Ingredient("MUST", "Mustard",  "Горчица", Ingredient.Type.SAUCE)
         );
 
+    }
     private InMemoryIngredients() {
     }
 
-    public static List<Ingredient> get() {
+    @Override
+    public List<Ingredient> findAll() {
         return ingredients;
     }
 }
