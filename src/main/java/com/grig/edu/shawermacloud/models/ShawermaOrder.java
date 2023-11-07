@@ -7,10 +7,15 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class ShawermaOrder {
+
+    private Long id;
+    private Date placedAt = new Date();
+
     @NotBlank(message = "Обязательно для заполнения")
     private String deliveryName;
     @NotBlank(message = "Обязательно для заполнения")

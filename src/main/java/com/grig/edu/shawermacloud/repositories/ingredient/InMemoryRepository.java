@@ -1,12 +1,13 @@
-package com.grig.edu.shawermacloud.repositories;
+package com.grig.edu.shawermacloud.repositories.ingredient;
 
 import com.grig.edu.shawermacloud.models.Ingredient;
+import com.grig.edu.shawermacloud.repositories.IngredientRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class InMemoryIngredients implements IngredientRepository {
+public class InMemoryRepository implements IngredientRepository {
     private final List<Ingredient> ingredients;
     {
         ingredients = List.of(
@@ -30,7 +31,7 @@ public class InMemoryIngredients implements IngredientRepository {
         );
 
     }
-    private InMemoryIngredients() {
+    public InMemoryRepository() {
     }
 
     @Override
