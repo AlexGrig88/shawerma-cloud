@@ -7,15 +7,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class ShawermaCloudApplication implements WebMvcConfigurer {
+public class ShawermaCloudApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ShawermaCloudApplication.class, args);
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/success").setViewName("success");
-
-    }
 }
